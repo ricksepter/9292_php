@@ -37,7 +37,7 @@ class ApiController extends Controller
         }
 
         return view('index', [
-            'stations' => $allStations
+            'allStations' => $allStations
         ]);
     }
 
@@ -79,7 +79,7 @@ class ApiController extends Controller
         }
 
         return view('station-details', [
-            'station' => $currentStation,
+            'currentStation' => $currentStation,
             'arrivals' => $arrivals,
             'departures' => $departures,
             'destinations' => $destinations
