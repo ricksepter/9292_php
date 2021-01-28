@@ -4,7 +4,7 @@
     <a href="{{ url('/' . $trips[0]['legs'][0]['origin']['uicCode']) }}">
         <h3>Terug naar details van station {{ $trips[0]['legs'][0]['origin']['name'] }}</h3>
     </a>
-    <h1>Mogelijke ritten</h1>
+    <h1>Gevonden ritten</h1>
     @foreach ($trips as $trip)
 
         <div id="trips-card">
