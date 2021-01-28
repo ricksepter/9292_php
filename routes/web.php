@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ApiController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [ApiController::class, 'getAllStations']);
+Route::get('/{uicCode}', [ApiController::class, 'getStationDetails']);
+Route::get('/{departure}/{arrival}', [ApiController::class, 'getTripDetails'])->name('getTripDetails');
+Route::post('/resolver', [ApiController::class, 'resolver']);
