@@ -1,15 +1,23 @@
 @extends('layouts.layout')
 
 @section('content')
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <h3 class="navbar-brand">9292 PHP</h3>
+    </nav>
     <div>
         <form action="{{ url('/') }}" method="get">
-            <input type="search" name="station" placeholder="Zoeken" value="{{ $_GET['station'] ?? '' }}">
-            <button type="submit">
+            <div class="input-group rounded p-4">
+
+
+            <input type="search" class="form-control rounded" name="station" placeholder="Voer hier het gewenste station in..." value="{{ $_GET['station'] ?? '' }}">
+            <button class="btn btn-outline-primary" type="submit">
                 Zoeken
             </button>
+            </div>
         </form>
 
-        <table id="stationTable">
+        <table class="table table-hover">
             <tr>
                 <th>Naam station</th>
                 <th>Land</th>

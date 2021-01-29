@@ -2,40 +2,43 @@
 
 @section('content')
 
-<a href="{{ url('/') }}">
-    <h3>Terug naar overzicht</h3>
-</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <h3 class="navbar-brand">9292 PHP</h3>
 
-<h2>Station {{$currentStation['namen']['lang']}}</h2>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url('/') }}">
+                    Terug naar overzicht
+                </a>
+            </li>
+        </ul>
+    </nav>
 
 
-<h3>Plan uw rit</h3>
-<form method="get">
-    <div id="destinationSearch">
-        <input type="search" name="destination" placeholder="Gewenste bestemming..." value="{{ $_GET['destination'] ?? '' }}">
+    <h2 class="p-5 text-center">Station {{$currentStation['namen']['lang']}}</h2>
 
-        <button type="submit">
-            Zoeken
-        </button>
-    </div>
+    <h3>Plan uw rit</h3>
+    <form method="get">
+        <div class="input-group rounded p-4">
+            <input type="search" class="form-control rounded" name="destination" placeholder="Voer uw gewenste bestemming in..." value="{{ $_GET['destination'] ?? '' }}">
 
-    <div id="destinationResult">
+            <button type="submit" class="btn btn-outline-primary">Zoeken</button>
+
+        </div>
         @if (isset($destinations) && count($destinations) > 0)
             @foreach ($destinations as $destination)
-                <button type="submit" formaction="{{ url('/'.$currentStation['UICCode'].'/'.$destination['UICCode']) }}">
-                    <p>{{ $destination['namen']['lang'] }}</p>
-                </button>
+                <div class="card m-2" style="width: 18rem;">
+                    <a class="card-body" type="submit" href="{{ url('/'.$currentStation['UICCode'].'/'.$destination['UICCode']) }}">
+                        <p>{{ $destination['namen']['lang'] }}</p>
+                    </a>
+                </div>
             @endforeach
         @endif
-    </div>
+    </form>
 
-</form>
-
-
-<div id="stationDetails">
-    <div id="arrivalTable">
+    <div>
         <h3>Details aankomende treinen</h3>
-        <table>
+        <table class="table table-striped">
             <tr>
                 <th>Afkomstig van</th>
                 <th>Geplande aankomsttijd</th>
@@ -57,11 +60,9 @@
                 </tr>
             @endforeach
         </table>
-    </div>
 
-    <div id="departureTable">
         <h3>Details vertrekkende treinen</h3>
-        <table id="stationTable">
+        <table class="table table-striped">
             <tr>
                 <th>Bestemming</th>
                 <th>Geplande vertrektijd</th>
@@ -84,5 +85,4 @@
             @endforeach
         </table>
     </div>
-</div>
 @endsection
