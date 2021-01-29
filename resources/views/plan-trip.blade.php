@@ -71,19 +71,33 @@
 
             <p>
                 Prijs enkele reis 1e klas:
-                @if (isset($trip['fares'][0]['priceInCents']))
-                    €{{number_format($trip['fares'][0]['priceInCents']/100, 2, ',', ' ')}}
-                @else
-                    onbekend
+                @if (isset($trip['fares']) && count($trip['fares']) > 0)
+                    @foreach ($trip['fares'] as $fare)
+                        @if ($fare['product'] === 'OVCHIPKAART_ENKELE_REIS' && $fare['travelClass'] === 'FIRST_CLASS' && $fare['discountType'] === 'NO_DISCOUNT')
+                            @if (isset($trip['fares'][0]['priceInCents']))
+                                €{{number_format($fare['priceInCents']/100, 2, ',', ' ')}}
+                            @else
+                                onbekend
+                            @endif
+                        @endif
+                    @endforeach
                 @endif
+
+
             </p>
 
             <p>
                 Prijs enkele reis 2e klas:
-                @if (isset($trip['fares'][1]['priceInCents']))
-                    €{{number_format($trip['fares'][1]['priceInCents']/100, 2, ',', ' ')}}
-                @else
-                    onbekend
+                @if (isset($trip['fares']) && count($trip['fares']) > 0)
+                    @foreach ($trip['fares'] as $fare)
+                        @if ($fare['product'] === 'OVCHIPKAART_ENKELE_REIS' && $fare['travelClass'] === 'SECOND_CLASS' && $fare['discountType'] === 'NO_DISCOUNT')
+                            @if (isset($trip['fares'][0]['priceInCents']))
+                                €{{number_format($fare['priceInCents']/100, 2, ',', ' ')}}
+                            @else
+                                onbekend
+                            @endif
+                        @endif
+                    @endforeach
                 @endif
             </p>
 
