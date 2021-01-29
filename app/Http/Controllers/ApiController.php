@@ -44,9 +44,6 @@ class ApiController extends Controller
     }
 
     public function getStationDetails(Request $req) {
-        // TODO implement datepicker for planning trip
-        $currentTimeAndDate = now('Europe/Amsterdam')->format(\DateTime::RFC3339);
-
         // Retrieve list of all stations from API
         $res = $this->client->get('reisinformatie-api/api/v2/stations');
         $allStations = json_decode($res->getBody()->getContents(), true)['payload'];
@@ -70,6 +67,9 @@ class ApiController extends Controller
                 return (stripos($var['namen']['lang'], $destination) !== false) && $var['UICCode'] !== $req->uicCode;
             });
         }
+
+        // TODO implement datepicker for planning trip
+        $currentTimeAndDate = now('Europe/Amsterdam')->format(\DateTime::RFC3339);
 
         // Retrieve list of all arrivals on specific station from API
         $res = $this->client->get('reisinformatie-api/api/v2/arrivals?uicCode='.$req->uicCode .
